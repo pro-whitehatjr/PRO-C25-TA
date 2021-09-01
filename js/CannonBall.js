@@ -11,11 +11,13 @@ class CannonBall {
   }
 
   shoot() {
-    var newAngle = cannon.angle - 0.5;
+   var newAngle = cannon.angle - 28;
+    newAngle = newAngle *(3.14/180)
     var velocity = p5.Vector.fromAngle(newAngle);
-    velocity.mult(20);
+    velocity.mult(0.5);
     Matter.Body.setStatic(this.body, false);
-    Matter.Body.setVelocity(this.body, { x: velocity.x, y: velocity.y });
+    Matter.Body.setVelocity(this.body, {
+      x: velocity.x *(180/3.14), y: velocity.y * (180/3.14)});  
   }
 
   display() {
@@ -26,7 +28,7 @@ class CannonBall {
     image(this.image, pos.x, pos.y, this.r, this.r);
     pop();
 
-    // Additional Activity
+    
     if (this.body.velocity.x > 0 && pos.x > 10) {
       var position = [pos.x, pos.y];
       this.trajectory.push(position);
